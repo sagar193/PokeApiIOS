@@ -14,6 +14,8 @@
 		CE41AB951D09A7DE00DA7F91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE41AB931D09A7DE00DA7F91 /* LaunchScreen.storyboard */; };
 		CE41ABA01D09A7DE00DA7F91 /* PokeApiAdminTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE41AB9F1D09A7DE00DA7F91 /* PokeApiAdminTests.swift */; };
 		CEFEB3831D12CC4600A7B3B9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEB3821D12CC4600A7B3B9 /* LoginViewController.swift */; };
+		CEFEB3851D19876200A7B3B9 /* PokeApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEB3841D19876200A7B3B9 /* PokeApi.swift */; };
+		CEFEB3871D1D5E6000A7B3B9 /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEB3861D1D5E6000A7B3B9 /* AlertMessage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,8 @@
 		CE41AB9F1D09A7DE00DA7F91 /* PokeApiAdminTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeApiAdminTests.swift; sourceTree = "<group>"; };
 		CE41ABA11D09A7DE00DA7F91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEFEB3821D12CC4600A7B3B9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CEFEB3841D19876200A7B3B9 /* PokeApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokeApi.swift; sourceTree = "<group>"; };
+		CEFEB3861D1D5E6000A7B3B9 /* AlertMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,8 @@
 				CE41AB931D09A7DE00DA7F91 /* LaunchScreen.storyboard */,
 				CE41AB961D09A7DE00DA7F91 /* Info.plist */,
 				CEFEB3821D12CC4600A7B3B9 /* LoginViewController.swift */,
+				CEFEB3841D19876200A7B3B9 /* PokeApi.swift */,
+				CEFEB3861D1D5E6000A7B3B9 /* AlertMessage.swift */,
 			);
 			path = PokeApiAdmin;
 			sourceTree = "<group>";
@@ -200,6 +206,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEFEB3851D19876200A7B3B9 /* PokeApi.swift in Sources */,
+				CEFEB3871D1D5E6000A7B3B9 /* AlertMessage.swift in Sources */,
 				CE41AB8D1D09A7DD00DA7F91 /* ViewController.swift in Sources */,
 				CE41AB8B1D09A7DD00DA7F91 /* AppDelegate.swift in Sources */,
 				CEFEB3831D12CC4600A7B3B9 /* LoginViewController.swift in Sources */,

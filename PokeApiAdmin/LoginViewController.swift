@@ -8,13 +8,14 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController{
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    var alertMessage: AlertMessage!
     
     override func viewDidAppear(animated: Bool) {
         emailTextField.text = NSUserDefaults.standardUserDefaults().stringForKey("userEmail")
-        
+        alertMessage = AlertMessage()
     }
     
     
@@ -23,23 +24,32 @@ class LoginViewController: UIViewController {
         let password = passwordTextField.text;
         
         if (email!.isEmpty || password!.isEmpty) {
-            displayAlertmessage("All fields are required")
+            alertMessage.displayErrorMessage("All fields are required", ViewController: self)
             return;
         }
         
-        NSUserDefaults.standardUserDefaults().setObject(email, forKey: "userEmail")
-        NSUserDefaults.standardUserDefaults().synchronize()
-        dismissViewControllerAnimated(true, completion: nil)
+        let pokeApi = PokeApi()
+        pokeApi.login(email!, password: password!, completionHandler: { responseCode, error in
+            if responseCode == 200 {
+                NSUserDefaults.standardUserDefaults().setObject(email, forKey: "userEmail")
+                NSUserDefaults.standardUserDefaults().synchronize()
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.performSegueWithIdentifier("mainViewController", sender: self)
+                    });
+            } else if responseCode == 401 {
+                self.alertMessage.displayErrorMessage("Invalid credentials provided", ViewController: self)
+                return;
+            } else {
+                self.alertMessage.displayErrorMessage("response code :\(responseCode)", ViewController: self)
+            }
+        })
         
-    }
+        //getCurrentUser_request()
+        
+        
+        
+    }    
     
-    func displayAlertmessage(message: String){
-        let alertMessage = UIAlertController(title: "Alert", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
-        
-        alertMessage.addAction(okAction)
-        self.presentViewController(alertMessage, animated:true, completion:nil)
-        
-    }
+    
 
 }
