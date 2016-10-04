@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE0C33521DA3C23A000A1DCF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C33511DA3C23A000A1DCF /* User.swift */; };
 		CE41AB8B1D09A7DD00DA7F91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE41AB8A1D09A7DD00DA7F91 /* AppDelegate.swift */; };
 		CE41AB8D1D09A7DD00DA7F91 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE41AB8C1D09A7DD00DA7F91 /* ViewController.swift */; };
 		CE41AB901D09A7DD00DA7F91 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE41AB8E1D09A7DD00DA7F91 /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE0C33511DA3C23A000A1DCF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CE41AB871D09A7DD00DA7F91 /* PokeApiAdmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokeApiAdmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE41AB8A1D09A7DD00DA7F91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE41AB8C1D09A7DD00DA7F91 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -84,14 +86,15 @@
 			isa = PBXGroup;
 			children = (
 				CE41AB8A1D09A7DD00DA7F91 /* AppDelegate.swift */,
-				CE41AB8C1D09A7DD00DA7F91 /* ViewController.swift */,
 				CE41AB8E1D09A7DD00DA7F91 /* Main.storyboard */,
 				CE41AB911D09A7DE00DA7F91 /* Assets.xcassets */,
 				CE41AB931D09A7DE00DA7F91 /* LaunchScreen.storyboard */,
 				CE41AB961D09A7DE00DA7F91 /* Info.plist */,
+				CE0C33511DA3C23A000A1DCF /* User.swift */,
+				CE41AB8C1D09A7DD00DA7F91 /* ViewController.swift */,
 				CEFEB3821D12CC4600A7B3B9 /* LoginViewController.swift */,
-				CEFEB3841D19876200A7B3B9 /* PokeApi.swift */,
 				CEFEB3861D1D5E6000A7B3B9 /* AlertMessage.swift */,
+				CEFEB3841D19876200A7B3B9 /* PokeApi.swift */,
 			);
 			path = PokeApiAdmin;
 			sourceTree = "<group>";
@@ -103,7 +106,7 @@
 				CE41ABA11D09A7DE00DA7F91 /* Info.plist */,
 			);
 			path = PokeApiAdminTests;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -208,6 +211,7 @@
 			files = (
 				CEFEB3851D19876200A7B3B9 /* PokeApi.swift in Sources */,
 				CEFEB3871D1D5E6000A7B3B9 /* AlertMessage.swift in Sources */,
+				CE0C33521DA3C23A000A1DCF /* User.swift in Sources */,
 				CE41AB8D1D09A7DD00DA7F91 /* ViewController.swift in Sources */,
 				CE41AB8B1D09A7DD00DA7F91 /* AppDelegate.swift in Sources */,
 				CEFEB3831D12CC4600A7B3B9 /* LoginViewController.swift in Sources */,

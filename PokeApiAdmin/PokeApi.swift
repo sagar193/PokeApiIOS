@@ -88,19 +88,21 @@ class PokeApi {
         task.resume()
     }
     
-    func getAllUsers(completionHandler : ( String?, [String]?) -> Void) {
-        let url = NSURL(string: "https://pokeapi9001.herokuapp.com/api/users/")
+    func getTenUsers(page: Int, completionHandler : ( String?, [String]?) -> Void) {
+        print("https://pokeapi9001.herokuapp.com/api/users?page=\(page)")
+        let url = NSURL(string: "https://pokeapi9001.herokuapp.com/api/users?page=\(page)")
         let request = NSMutableURLRequest(URL:url!)
         request.HTTPMethod = "GET"
         
         request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringCacheData
-        
+        print("before task")
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
             data, response, error in
             
             if error != nil {
                 print("error: \(error)")
             }
+            print("in the get method")
             
             do {
                 guard let data = data else {
@@ -113,11 +115,13 @@ class PokeApi {
                     completionHandler("not logged in", nil)
                 } else if json["status"]!.integerValue == 200 {
                     var userArray = [String]()
-                    userArray.append("testing")
-                    print(json["data"]!.count)
-                    for var i = 0; i < json["data"]!.count ; i += 1 {
-                        print("newline")
-                        userArray.append(json["data"]![i]["local"]!!["email"] as! String)
+                    print("user count in API method\(json["data"]!.count)")
+                    for i in 0 ..< json["data"]!.count  {
+                        if json["data"]![i]["local"]! != nil {
+                            userArray.append(json["data"]![i]["local"]!!["email"] as! String)
+                        } else if json["data"]![i]["facebook"]! != nil {
+                            userArray.append(json["data"]![i]["facebook"]!!["email"] as! String)
+                        }
                     }
                     
                     completionHandler(nil, userArray)
@@ -133,4 +137,5 @@ class PokeApi {
         }
         task.resume()
     }
+    
 }
