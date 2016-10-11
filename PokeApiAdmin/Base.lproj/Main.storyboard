@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--User list-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="PokeApiAdmin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="UserTableViewController" customModule="PokeApiAdmin" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -53,7 +53,13 @@
                             <constraint firstItem="VdV-4o-Uhs" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="zJh-iy-44y"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="ajE-gq-H0X"/>
+                    <navigationItem key="navigationItem" title="User list" id="ajE-gq-H0X">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="i7d-3L-F7u">
+                            <connections>
+                                <segue destination="EOJ-4c-2f9" kind="presentation" identifier="AddUser" id="dCw-0r-s4T"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="tableView" destination="VdV-4o-Uhs" id="iR0-N8-7rZ"/>
@@ -62,6 +68,87 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1364.5" y="423.5"/>
+        </scene>
+        <!--New User-->
+        <scene sceneID="aCT-Ei-kB5">
+            <objects>
+                <viewController id="hok-ml-twz" customClass="UserViewController" customModule="PokeApiAdmin" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uoC-Rz-7fu"/>
+                        <viewControllerLayoutGuide type="bottom" id="BB7-B1-0Mo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jMd-O6-Y3v">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jo7-Pj-zFU">
+                                <rect key="frame" x="53" y="81" width="50" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ks-aC-6GQ">
+                                <rect key="frame" x="20" y="119" width="83" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Role: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tii-2Z-xjz">
+                                <rect key="frame" x="60" y="157" width="43" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hax-hi-pHf">
+                                <rect key="frame" x="111" y="77" width="244" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tf5-dt-jqq">
+                                <rect key="frame" x="111" y="153" width="244" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4XE-eq-PRh">
+                                <rect key="frame" x="111" y="115" width="244" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Tii-2Z-xjz" firstAttribute="centerY" secondItem="tf5-dt-jqq" secondAttribute="centerY" id="12l-Kp-015"/>
+                            <constraint firstItem="jo7-Pj-zFU" firstAttribute="centerY" secondItem="Hax-hi-pHf" secondAttribute="centerY" id="6ZE-0b-EAm"/>
+                            <constraint firstItem="6ks-aC-6GQ" firstAttribute="centerY" secondItem="4XE-eq-PRh" secondAttribute="centerY" id="CTT-45-gXB"/>
+                            <constraint firstItem="4XE-eq-PRh" firstAttribute="leading" secondItem="6ks-aC-6GQ" secondAttribute="trailing" constant="8" symbolic="YES" id="E1C-fj-b8l"/>
+                            <constraint firstItem="4XE-eq-PRh" firstAttribute="trailing" secondItem="tf5-dt-jqq" secondAttribute="trailing" id="IZW-Ny-qEr"/>
+                            <constraint firstItem="4XE-eq-PRh" firstAttribute="top" secondItem="Hax-hi-pHf" secondAttribute="bottom" constant="8" symbolic="YES" id="LeR-N0-AKx"/>
+                            <constraint firstItem="Hax-hi-pHf" firstAttribute="trailing" secondItem="4XE-eq-PRh" secondAttribute="trailing" id="LzB-z2-asO"/>
+                            <constraint firstItem="Hax-hi-pHf" firstAttribute="leading" secondItem="jo7-Pj-zFU" secondAttribute="trailing" constant="8" symbolic="YES" id="aM6-aX-0Vf"/>
+                            <constraint firstItem="Hax-hi-pHf" firstAttribute="top" secondItem="uoC-Rz-7fu" secondAttribute="bottom" constant="13" id="bbT-Nu-hdx"/>
+                            <constraint firstItem="6ks-aC-6GQ" firstAttribute="leading" secondItem="jMd-O6-Y3v" secondAttribute="leadingMargin" constant="4" id="dtX-6F-OJE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Hax-hi-pHf" secondAttribute="trailing" constant="4" id="hH7-SL-fdS"/>
+                            <constraint firstItem="tf5-dt-jqq" firstAttribute="top" secondItem="4XE-eq-PRh" secondAttribute="bottom" constant="8" symbolic="YES" id="hWm-Hq-Vzv"/>
+                            <constraint firstItem="4XE-eq-PRh" firstAttribute="leading" secondItem="tf5-dt-jqq" secondAttribute="leading" id="nQl-ed-QQE"/>
+                            <constraint firstItem="Hax-hi-pHf" firstAttribute="leading" secondItem="4XE-eq-PRh" secondAttribute="leading" id="rVq-zh-5Cq"/>
+                            <constraint firstItem="tf5-dt-jqq" firstAttribute="leading" secondItem="Tii-2Z-xjz" secondAttribute="trailing" constant="8" symbolic="YES" id="wvD-gt-GSM"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="New User" id="X5Q-1w-mbJ">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="A3C-X3-lKI"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="FIk-zI-If8" customClass="UserViewController" customModule="PokeApiAdmin" customModuleProvider="target"/>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="Hax-hi-pHf" id="Bl9-mf-lQ9"/>
+                        <outlet property="passwordTextField" destination="4XE-eq-PRh" id="xgI-th-zMe"/>
+                        <outlet property="roleTextField" destination="tf5-dt-jqq" id="013-Xt-86N"/>
+                        <outlet property="saveButton" destination="FIk-zI-If8" id="6vy-Fy-sdY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hbH-QP-hB6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2470.5" y="423.5"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="YoE-h3-Q3E">
@@ -164,6 +251,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WKy-cA-co4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="777.5" y="423.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="JbY-5W-YOa">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EOJ-4c-2f9" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="L7l-R2-HLF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="hok-ml-twz" kind="relationship" relationship="rootViewController" id="kWI-wG-7vg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BqJ-Yp-vFh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1902.5" y="423.5"/>
         </scene>
     </scenes>
 </document>

@@ -14,6 +14,14 @@ enum JSONError: String, ErrorType {
 }
 
 class PokeApi {
+    //MARK: Variables
+    var roles = [String: String]()
+    static let instance = PokeApi()
+    
+    //MARK:Inits
+    private init() { }
+    
+    //MARK: Actions
     func login(email: String, password: String, completionHandler :(Int?, String?) -> Void){
         let url = NSURL(string: "https://pokeapi9001.herokuapp.com/api/login/")
         let request = NSMutableURLRequest(URL:url!)
@@ -88,21 +96,20 @@ class PokeApi {
         task.resume()
     }
     
-    func getTenUsers(page: Int, completionHandler : ( String?, [String]?) -> Void) {
-        print("https://pokeapi9001.herokuapp.com/api/users?page=\(page)")
+    func getTenUsers(page: Int, completionHandler : ( String?, [User]?) -> Void) {
+        getRoles { ( str1, role) in }
+        
         let url = NSURL(string: "https://pokeapi9001.herokuapp.com/api/users?page=\(page)")
         let request = NSMutableURLRequest(URL:url!)
         request.HTTPMethod = "GET"
         
         request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringCacheData
-        print("before task")
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
             data, response, error in
             
             if error != nil {
                 print("error: \(error)")
             }
-            print("in the get method")
             
             do {
                 guard let data = data else {
@@ -114,14 +121,23 @@ class PokeApi {
                 if json["status"]!.integerValue == 401 {
                     completionHandler("not logged in", nil)
                 } else if json["status"]!.integerValue == 200 {
-                    var userArray = [String]()
-                    print("user count in API method\(json["data"]!.count)")
+                    var userArray = [User]()
                     for i in 0 ..< json["data"]!.count  {
+                        //get name
+                        var name: String = ""
                         if json["data"]![i]["local"]! != nil {
-                            userArray.append(json["data"]![i]["local"]!!["email"] as! String)
+                            name = json["data"]![i]["local"]!!["email"] as! String
                         } else if json["data"]![i]["facebook"]! != nil {
-                            userArray.append(json["data"]![i]["facebook"]!!["email"] as! String)
+                            name = json["data"]![i]["facebook"]!!["email"] as! String
                         }
+                        //get id
+                        let id = json["data"]![i]["_id"]!! as! String
+                        //get roles
+                        
+                        var role = json["data"]![i]["role"]!! as! String
+                        role = self.roles[role]!
+                        let user = User(email: name, id: id, role: role)
+                        userArray.append(user)
                     }
                     
                     completionHandler(nil, userArray)
@@ -129,6 +145,57 @@ class PokeApi {
                     completionHandler("unexpected error", nil)
                 }
                 
+            } catch let error as JSONError {
+                completionHandler(error.rawValue, nil)
+            } catch let error as NSError {
+                completionHandler(error.debugDescription, nil)
+            }
+        }
+        task.resume()
+    }
+    
+    func getRoles(completionHandler: (String?, [String: String]?) -> Void) {
+        //Set up the url and HTTP Method
+        let url = NSURL(string: "https://pokeapi9001.herokuapp.com/api/roles")
+        let request = NSMutableURLRequest(URL:url!)
+        request.HTTPMethod = "GET"
+        
+        request.cachePolicy = NSURLRequestCachePolicy.ReturnCacheDataElseLoad
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            data, response, error in
+            
+            if error != nil {
+                print("Error: \(error)")
+                return
+            }
+            do {
+                guard let data = data else {
+                    throw JSONError.NoData
+                }
+                //If data parsing to JSON  doesn't works then execute the following code
+                guard let json = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? NSDictionary else {
+                    throw JSONError.ConversionFailed
+                // if data parsing works, but an 401 is given
+                }
+                if json["status"]!.integerValue == 401 {
+                    completionHandler("User not logged in!", nil)
+                // if a status 200 is given
+                } else if json["status"]!.integerValue == 200 {
+                    //Create a fresh instance of roles
+                    self.roles = [:]
+                    //Add every role
+                    for i in 0 ..< json["data"]!.count {
+                        let id = json["data"]![i]["_id"]!! as! String
+                        let name = json["data"]![i]["name"]!! as! String
+                        self.roles[id] = name
+                    }
+                    completionHandler(nil, self.roles)
+                //if neither a 401 or a 200 error is given by the server
+                } else {
+                    completionHandler("unexpected error", nil)
+                }
+            //Data parsing failed, code is printed to the console
+            //More clear error messages might have to be implemented
             } catch let error as JSONError {
                 completionHandler(error.rawValue, nil)
             } catch let error as NSError {

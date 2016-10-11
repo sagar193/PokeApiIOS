@@ -8,13 +8,13 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
+class UserTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
     
-    var users: [String] = []
-    var page = 1
+    var users: [User] = []
+    var page = 0
     var loadingMore = false
     var moreData = true
-    let api = PokeApi()
+    let api = PokeApi.instance
     let alertMassage = AlertMessage()
     @IBOutlet weak var tableView: UITableView!
     
@@ -24,9 +24,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         users = []
         page = 0
         moreData = true
-        
-        
-        //var errorCode: Int?, errorMessage: String?, users: [String]
         
         loadMore()
     }
@@ -40,7 +37,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     override func viewDidAppear(animated: Bool) {
-        tableView.reloadData()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,14 +45,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("customcell", forIndexPath: indexPath) as UITableViewCell!
-        cell.textLabel?.text = users[indexPath.item]
+        cell.textLabel?.text = users[indexPath.item].email
         return cell
         
     }
     
     func loadMore(){
         page += 1
-        print("loading more \(page)")
         api.getTenUsers(page, completionHandler: { errorMessage, newUsers in
             if errorMessage != nil {
                 self.alertMassage.displayErrorMessage(errorMessage!, ViewController: self)
@@ -66,6 +61,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 return
             }
             self.users += newUsers!
+            //reload tableView data not asynch
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.tableView.reloadData()
+            })
             self.loadingMore = false
         })
     }
@@ -76,7 +75,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 loadingMore = true
                 loadMore()
             }
-            self.tableView.reloadData()
         }
     }
     

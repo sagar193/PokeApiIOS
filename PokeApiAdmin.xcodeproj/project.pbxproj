@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		CE0C33521DA3C23A000A1DCF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C33511DA3C23A000A1DCF /* User.swift */; };
+		CE0C33561DAB96D9000A1DCF /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C33551DAB96D9000A1DCF /* UserViewController.swift */; };
 		CE41AB8B1D09A7DD00DA7F91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE41AB8A1D09A7DD00DA7F91 /* AppDelegate.swift */; };
-		CE41AB8D1D09A7DD00DA7F91 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE41AB8C1D09A7DD00DA7F91 /* ViewController.swift */; };
+		CE41AB8D1D09A7DD00DA7F91 /* UserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE41AB8C1D09A7DD00DA7F91 /* UserTableViewController.swift */; };
 		CE41AB901D09A7DD00DA7F91 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE41AB8E1D09A7DD00DA7F91 /* Main.storyboard */; };
 		CE41AB921D09A7DE00DA7F91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE41AB911D09A7DE00DA7F91 /* Assets.xcassets */; };
 		CE41AB951D09A7DE00DA7F91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE41AB931D09A7DE00DA7F91 /* LaunchScreen.storyboard */; };
@@ -31,9 +32,10 @@
 
 /* Begin PBXFileReference section */
 		CE0C33511DA3C23A000A1DCF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		CE0C33551DAB96D9000A1DCF /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		CE41AB871D09A7DD00DA7F91 /* PokeApiAdmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokeApiAdmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE41AB8A1D09A7DD00DA7F91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CE41AB8C1D09A7DD00DA7F91 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CE41AB8C1D09A7DD00DA7F91 /* UserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewController.swift; sourceTree = "<group>"; };
 		CE41AB8F1D09A7DD00DA7F91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CE41AB911D09A7DE00DA7F91 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE41AB941D09A7DE00DA7F91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -91,8 +93,9 @@
 				CE41AB931D09A7DE00DA7F91 /* LaunchScreen.storyboard */,
 				CE41AB961D09A7DE00DA7F91 /* Info.plist */,
 				CE0C33511DA3C23A000A1DCF /* User.swift */,
-				CE41AB8C1D09A7DD00DA7F91 /* ViewController.swift */,
+				CE41AB8C1D09A7DD00DA7F91 /* UserTableViewController.swift */,
 				CEFEB3821D12CC4600A7B3B9 /* LoginViewController.swift */,
+				CE0C33551DAB96D9000A1DCF /* UserViewController.swift */,
 				CEFEB3861D1D5E6000A7B3B9 /* AlertMessage.swift */,
 				CEFEB3841D19876200A7B3B9 /* PokeApi.swift */,
 			);
@@ -209,10 +212,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE0C33561DAB96D9000A1DCF /* UserViewController.swift in Sources */,
 				CEFEB3851D19876200A7B3B9 /* PokeApi.swift in Sources */,
 				CEFEB3871D1D5E6000A7B3B9 /* AlertMessage.swift in Sources */,
 				CE0C33521DA3C23A000A1DCF /* User.swift in Sources */,
-				CE41AB8D1D09A7DD00DA7F91 /* ViewController.swift in Sources */,
+				CE41AB8D1D09A7DD00DA7F91 /* UserTableViewController.swift in Sources */,
 				CE41AB8B1D09A7DD00DA7F91 /* AppDelegate.swift in Sources */,
 				CEFEB3831D12CC4600A7B3B9 /* LoginViewController.swift in Sources */,
 			);
