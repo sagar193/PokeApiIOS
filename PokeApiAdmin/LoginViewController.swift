@@ -13,7 +13,7 @@ class LoginViewController: UIViewController{
     let pokeApi = PokeApi.instance
     var alertMessage: AlertMessage!
     
-    //Mark: UIElements
+    //MARK: UIElements
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
@@ -38,7 +38,7 @@ class LoginViewController: UIViewController{
                 NSUserDefaults.standardUserDefaults().setObject(email, forKey: "userEmail")
                 NSUserDefaults.standardUserDefaults().synchronize()
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.performSegueWithIdentifier("mainViewController", sender: self)
+                    self.performSegueWithIdentifier("userTableViewController", sender: self)
                     })
             } else if responseCode == 401 {
                 dispatch_async(dispatch_get_main_queue(), {

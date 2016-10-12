@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BZq-ZH-UVT">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BZq-ZH-UVT">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -54,6 +54,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="User list" id="ajE-gq-H0X">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="Ev2-BR-idU"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="i7d-3L-F7u">
                             <connections>
                                 <segue destination="EOJ-4c-2f9" kind="presentation" identifier="AddUser" id="dCw-0r-s4T"/>
@@ -84,28 +85,23 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jo7-Pj-zFU">
                                 <rect key="frame" x="53" y="81" width="50" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ks-aC-6GQ">
                                 <rect key="frame" x="20" y="119" width="83" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Role: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tii-2Z-xjz">
                                 <rect key="frame" x="60" y="157" width="43" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hax-hi-pHf">
                                 <rect key="frame" x="111" y="77" width="244" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tf5-dt-jqq">
-                                <rect key="frame" x="111" y="153" width="244" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -114,8 +110,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tf5-dt-jqq">
+                                <rect key="frame" x="111" y="153" width="244" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Tii-2Z-xjz" firstAttribute="centerY" secondItem="tf5-dt-jqq" secondAttribute="centerY" id="12l-Kp-015"/>
                             <constraint firstItem="jo7-Pj-zFU" firstAttribute="centerY" secondItem="Hax-hi-pHf" secondAttribute="centerY" id="6ZE-0b-EAm"/>
@@ -133,20 +135,30 @@
                             <constraint firstItem="Hax-hi-pHf" firstAttribute="leading" secondItem="4XE-eq-PRh" secondAttribute="leading" id="rVq-zh-5Cq"/>
                             <constraint firstItem="tf5-dt-jqq" firstAttribute="leading" secondItem="Tii-2Z-xjz" secondAttribute="trailing" constant="8" symbolic="YES" id="wvD-gt-GSM"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="xLi-OD-lN7" appends="YES" id="1fg-NQ-TKd"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="New User" id="X5Q-1w-mbJ">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="A3C-X3-lKI"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="FIk-zI-If8" customClass="UserViewController" customModule="PokeApiAdmin" customModuleProvider="target"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="wvp-Hf-bEb">
+                            <connections>
+                                <segue destination="1nD-rv-P1D" kind="unwind" unwindAction="unwindToUserList:" id="C6M-lb-98F"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="emailTextField" destination="Hax-hi-pHf" id="Bl9-mf-lQ9"/>
-                        <outlet property="passwordTextField" destination="4XE-eq-PRh" id="xgI-th-zMe"/>
-                        <outlet property="roleTextField" destination="tf5-dt-jqq" id="013-Xt-86N"/>
-                        <outlet property="saveButton" destination="FIk-zI-If8" id="6vy-Fy-sdY"/>
+                        <outlet property="emailTextField" destination="Hax-hi-pHf" id="EKN-we-QAJ"/>
+                        <outlet property="passwordTextField" destination="4XE-eq-PRh" id="3NW-qt-zie"/>
+                        <outlet property="roleTextField" destination="tf5-dt-jqq" id="UvS-Tn-Pbq"/>
+                        <outlet property="saveButton" destination="wvp-Hf-bEb" id="m3r-PU-139"/>
+                        <outlet property="tap" destination="xLi-OD-lN7" id="mbQ-m6-lpL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hbH-QP-hB6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="1nD-rv-P1D" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="xLi-OD-lN7"/>
             </objects>
             <point key="canvasLocation" x="2470.5" y="423.5"/>
         </scene>
@@ -227,7 +239,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="vGl-bf-R0E" id="pn3-Ba-Xgj"/>
                         <outlet property="passwordTextField" destination="AvC-NM-SCn" id="QIh-wd-lDG"/>
-                        <segue destination="oKx-Mq-7SD" kind="showDetail" identifier="mainViewController" id="CZ8-Ux-aQ9"/>
+                        <segue destination="oKx-Mq-7SD" kind="showDetail" identifier="userTableViewController" id="CZ8-Ux-aQ9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Y6-o0-53Q" userLabel="First Responder" sceneMemberID="firstResponder"/>

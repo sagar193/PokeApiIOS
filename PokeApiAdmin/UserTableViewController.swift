@@ -9,15 +9,18 @@
 import UIKit
 
 class UserTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
-    
+    //MARK: Variables
     var users: [User] = []
     var page = 0
     var loadingMore = false
     var moreData = true
     let api = PokeApi.instance
     let alertMassage = AlertMessage()
+    
+    //MARK: UIElements
     @IBOutlet weak var tableView: UITableView!
     
+    //MARK: Actions
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -27,16 +30,10 @@ class UserTableViewController: UIViewController, UITableViewDelegate, UITableVie
         
         loadMore()
     }
-    
-    let threshold = 100.0 // threshold from bottom of tableView
-    var isLoadingMore = false // flag
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    override func viewDidAppear(animated: Bool) {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -61,7 +58,7 @@ class UserTableViewController: UIViewController, UITableViewDelegate, UITableVie
                 return
             }
             self.users += newUsers!
-            //reload tableView data not asynch
+            //reload tableView data not asynch (doing this asynch causes the tableview to sometimes update before the new data is available)
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.tableView.reloadData()
             })
@@ -80,6 +77,21 @@ class UserTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("You tapped cell number \(indexPath.row)")
+    }
+    
+    
+    @IBAction func unwindToUserList(sender: UIStoryboardSegue){
+        if let sourceViewController = sender.sourceViewController as? UserViewController, user = sourceViewController.user {
+            //add a new user
+            let newIndexPath = NSIndexPath(forRow: users.count, inSection: 0)
+            print("user mail = " + (user.email))
+            users.append(user)
+            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
+        }
+        if let sourceViewController = sender.sourceViewController as? UserViewController{
+        print(sourceViewController.user?.email)
+        }
+        
     }
 
 }
