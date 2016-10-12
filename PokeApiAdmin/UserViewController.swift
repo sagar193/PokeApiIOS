@@ -35,25 +35,36 @@ class UserViewController: UIViewController , UITextFieldDelegate{
     }
     
     //MARK: UITextFieldDelegate
-    //TODO: Split UITextFieldDelegate into another file and make it so every textfield enable/disable buttons/navigation items
-    func textFieldDidBeginEditing(textField: UITextField){
-        //Disable the save button while editing.
-        saveButton.enabled = false
-    }
-    
-    func checkValidUserName(){
+    func checkValidTextFields(){
         //Disable the save button if text field is empty
-        let text = emailTextField.text ?? ""
-        saveButton.enabled = !text.isEmpty
+        let email = emailTextField.text ?? ""
+        let password = passwordTextField.text ?? ""
+        let role = roleTextField.text ?? ""
+        
+        if email.isEmpty || password.isEmpty || role.isEmpty {
+            saveButton.enabled = false
+        } else {
+            saveButton.enabled = true
+        }
     }
     
     func textFieldDidEndEditing(textField: UITextField){
-        checkValidUserName()
         if textField.text == "" {
             navigationItem.title = "New User"
         } else {
             navigationItem.title = textField.text
         }
+    }
+    @IBAction func emailTextFieldValueChanged(sender: AnyObject) {
+        checkValidTextFields()
+    }
+    
+    @IBAction func passwordTextFieldValueChanged(sender: AnyObject) {
+        checkValidTextFields()
+    }
+    
+    @IBAction func roleTextFieldValueChanged(sender: AnyObject) {
+        checkValidTextFields()
     }
     
     
@@ -68,7 +79,7 @@ class UserViewController: UIViewController , UITextFieldDelegate{
         emailTextField.delegate = self
         
         //Enable the save button only if the text field has a valid user name.
-        checkValidUserName()
+        checkValidTextFields()
     }
     
     func dismissKeyboard(){

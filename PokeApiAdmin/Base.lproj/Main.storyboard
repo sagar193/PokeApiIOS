@@ -104,16 +104,25 @@
                                 <rect key="frame" x="111" y="77" width="244" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="emailTextFieldValueChanged:" destination="hok-ml-twz" eventType="editingChanged" id="9br-b1-C1v"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4XE-eq-PRh">
                                 <rect key="frame" x="111" y="115" width="244" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="passwordTextFieldValueChanged:" destination="hok-ml-twz" eventType="editingChanged" id="Dhc-P3-QBS"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tf5-dt-jqq">
                                 <rect key="frame" x="111" y="153" width="244" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="roleTextFieldValueChanged:" destination="hok-ml-twz" eventType="editingChanged" id="ASb-zi-UUw"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -214,6 +223,9 @@
                                 <rect key="frame" x="20" y="162" width="335" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="emailTextFieldValueChanged:" destination="BZq-ZH-UVT" eventType="editingDidBegin" id="dUw-hQ-pHG"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JAI-aU-R4b">
                                 <rect key="frame" x="20" y="133" width="335" height="21"/>
@@ -225,6 +237,9 @@
                                 <rect key="frame" x="20" y="229" width="335" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <connections>
+                                    <action selector="passwordTextFieldValueChanged:" destination="BZq-ZH-UVT" eventType="editingChanged" id="Otl-io-foF"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Login" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nf6-Sg-HQq">
                                 <rect key="frame" x="20" y="52" width="335" height="34"/>
@@ -234,15 +249,22 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="r5X-9Y-rG2" appends="YES" id="ftP-fp-YRF"/>
+                        </connections>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="emailTextField" destination="vGl-bf-R0E" id="pn3-Ba-Xgj"/>
+                        <outlet property="loginButton" destination="yFB-ud-cXz" id="CWx-XI-Bdq"/>
                         <outlet property="passwordTextField" destination="AvC-NM-SCn" id="QIh-wd-lDG"/>
+                        <outlet property="tapGestureRecognizer" destination="r5X-9Y-rG2" id="b8M-kB-EmA"/>
                         <segue destination="oKx-Mq-7SD" kind="showDetail" identifier="userTableViewController" id="CZ8-Ux-aQ9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Y6-o0-53Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="r5X-9Y-rG2"/>
             </objects>
             <point key="canvasLocation" x="250.5" y="423.5"/>
         </scene>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController{
+class LoginViewController: UIViewController, UITextFieldDelegate{
     //MARK: Variables
     let pokeApi = PokeApi.instance
     var alertMessage: AlertMessage!
@@ -16,13 +16,49 @@ class LoginViewController: UIViewController{
     //MARK: UIElements
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     
     //MARK: Actions
     override func viewDidAppear(animated: Bool) {
-        emailTextField.text = NSUserDefaults.standardUserDefaults().stringForKey("userEmail")
         alertMessage = AlertMessage()
+        
+        //fill the email textfield
+        emailTextField.text = NSUserDefaults.standardUserDefaults().stringForKey("userEmail")
+        //make it possible to dismiss the keyboard via a tap gesture
+        tapGestureRecognizer.addTarget(self, action: #selector(LoginViewController.dismissKeyboard))
+        
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        enableOrDisableLoginButton()
     }
     
+    func enableOrDisableLoginButton(){
+        let email = emailTextField.text ?? ""
+        let password = passwordTextField.text ?? ""
+        if email.isEmpty || password.isEmpty {
+            loginButton.enabled = false
+        } else {
+            loginButton.enabled = true
+        }
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        enableOrDisableLoginButton()
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        enableOrDisableLoginButton()
+    }
+    
+    @IBAction func emailTextFieldValueChanged(sender: AnyObject) {
+        enableOrDisableLoginButton()
+    }
+    
+    @IBAction func passwordTextFieldValueChanged(sender: AnyObject) {
+        enableOrDisableLoginButton()
+    }
+
     
     @IBAction func Login(sender: AnyObject) {
         let email = emailTextField.text;
@@ -54,6 +90,8 @@ class LoginViewController: UIViewController{
         
     }    
     
-    
+    func dismissKeyboard(){
+        view.endEditing(true)
+    }
 
 }
