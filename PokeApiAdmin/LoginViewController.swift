@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, UITextFieldDelegate{
+class LoginViewController: UIViewController{
     //MARK: Variables
     let pokeApi = PokeApi.instance
     var alertMessage: AlertMessage!
@@ -28,14 +28,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         //make it possible to dismiss the keyboard via a tap gesture
         tapGestureRecognizer.addTarget(self, action: #selector(LoginViewController.dismissKeyboard))
         
-        emailTextField.delegate = self
-        passwordTextField.delegate = self
         enableOrDisableLoginButton()
     }
     
     func enableOrDisableLoginButton(){
         let email = emailTextField.text ?? ""
         let password = passwordTextField.text ?? ""
+        
         if email.isEmpty || password.isEmpty {
             loginButton.enabled = false
         } else {
@@ -43,22 +42,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         }
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    @IBAction func textFieldValueChanged(sender: AnyObject) {
         enableOrDisableLoginButton()
     }
-    
-    func textFieldDidEndEditing(textField: UITextField) {
-        enableOrDisableLoginButton()
-    }
-    
-    @IBAction func emailTextFieldValueChanged(sender: AnyObject) {
-        enableOrDisableLoginButton()
-    }
-    
-    @IBAction func passwordTextFieldValueChanged(sender: AnyObject) {
-        enableOrDisableLoginButton()
-    }
-
     
     @IBAction func Login(sender: AnyObject) {
         let email = emailTextField.text;

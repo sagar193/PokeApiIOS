@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserViewController: UIViewController , UITextFieldDelegate{
+class UserViewController: UIViewController{
     //MARK: UIElements
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var emailTextField: UITextField!
@@ -36,11 +36,18 @@ class UserViewController: UIViewController , UITextFieldDelegate{
     
     //MARK: UITextFieldDelegate
     func checkValidTextFields(){
-        //Disable the save button if text field is empty
         let email = emailTextField.text ?? ""
         let password = passwordTextField.text ?? ""
         let role = roleTextField.text ?? ""
         
+        //Set the navigationItem title to the user typed email adress
+        if email == "" {
+            navigationItem.title = "New User"
+        } else {
+            navigationItem.title = email
+        }
+        
+        //Disable the save button if text field is empty
         if email.isEmpty || password.isEmpty || role.isEmpty {
             saveButton.enabled = false
         } else {
@@ -48,25 +55,9 @@ class UserViewController: UIViewController , UITextFieldDelegate{
         }
     }
     
-    func textFieldDidEndEditing(textField: UITextField){
-        if textField.text == "" {
-            navigationItem.title = "New User"
-        } else {
-            navigationItem.title = textField.text
-        }
-    }
-    @IBAction func emailTextFieldValueChanged(sender: AnyObject) {
+    @IBAction func textFieldValueChanged(sender: AnyObject) {
         checkValidTextFields()
     }
-    
-    @IBAction func passwordTextFieldValueChanged(sender: AnyObject) {
-        checkValidTextFields()
-    }
-    
-    @IBAction func roleTextFieldValueChanged(sender: AnyObject) {
-        checkValidTextFields()
-    }
-    
     
     //MARK: Actions
     override func viewDidLoad() {
@@ -74,9 +65,6 @@ class UserViewController: UIViewController , UITextFieldDelegate{
         
         //Execute dismissKeyboard when there is a tap gesture not on any element
         tap.addTarget(self, action: #selector(UserViewController.dismissKeyboard))
-        
-        //Handle the text field's user input through delegate callbacks.
-        emailTextField.delegate = self
         
         //Enable the save button only if the text field has a valid user name.
         checkValidTextFields()

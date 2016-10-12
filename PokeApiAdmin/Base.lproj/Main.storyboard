@@ -105,7 +105,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="emailTextFieldValueChanged:" destination="hok-ml-twz" eventType="editingChanged" id="9br-b1-C1v"/>
+                                    <action selector="textFieldValueChanged:" destination="hok-ml-twz" eventType="editingChanged" id="Kpp-Sg-5mf"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4XE-eq-PRh">
@@ -113,7 +113,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="passwordTextFieldValueChanged:" destination="hok-ml-twz" eventType="editingChanged" id="Dhc-P3-QBS"/>
+                                    <action selector="textFieldValueChanged:" destination="hok-ml-twz" eventType="editingChanged" id="djo-qs-bVK"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tf5-dt-jqq">
@@ -121,7 +121,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="roleTextFieldValueChanged:" destination="hok-ml-twz" eventType="editingChanged" id="ASb-zi-UUw"/>
+                                    <action selector="textFieldValueChanged:" destination="hok-ml-twz" eventType="editingChanged" id="54k-SM-ryT"/>
                                 </connections>
                             </textField>
                         </subviews>
@@ -224,7 +224,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="emailTextFieldValueChanged:" destination="BZq-ZH-UVT" eventType="editingDidBegin" id="dUw-hQ-pHG"/>
+                                    <action selector="textFieldValueChanged:" destination="BZq-ZH-UVT" eventType="editingChanged" id="kSw-I2-YA1"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JAI-aU-R4b">
@@ -238,7 +238,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <connections>
-                                    <action selector="passwordTextFieldValueChanged:" destination="BZq-ZH-UVT" eventType="editingChanged" id="Otl-io-foF"/>
+                                    <action selector="textFieldValueChanged:" destination="BZq-ZH-UVT" eventType="editingChanged" id="iXu-Bt-FNo"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Login" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nf6-Sg-HQq">
