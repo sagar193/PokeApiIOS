@@ -24,6 +24,10 @@ class UserViewController: UIViewController{
      or constructed as part of adding a new user.
      */
     //MARK: Navigation
+    @IBAction func cancel(sender: UIBarButtonItem) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if saveButton === sender {
             let email = emailTextField.text

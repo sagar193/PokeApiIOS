@@ -149,7 +149,11 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" title="New User" id="X5Q-1w-mbJ">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="A3C-X3-lKI"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="A3C-X3-lKI">
+                            <connections>
+                                <action selector="cancel:" destination="hok-ml-twz" id="C9C-MD-le8"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="wvp-Hf-bEb">
                             <connections>
                                 <segue destination="1nD-rv-P1D" kind="unwind" unwindAction="unwindToUserList:" id="C6M-lb-98F"/>
