@@ -10,12 +10,12 @@ import UIKit
 
 class UserTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
     //MARK: Variables
-    var users: [User] = []
-    var page = 0
-    var loadingMore = false
-    var moreData = true
-    let api = PokeApi.instance
-    let alertMassage = AlertMessage()
+    var users: [User]!
+    var page: Int!
+    var loadingMore: Bool!
+    var moreData: Bool!
+    var api: PokeApi!
+    var alertMessage: AlertMessage!
     
     //MARK: UIElements
     @IBOutlet weak var tableView: UITableView!
@@ -26,7 +26,10 @@ class UserTableViewController: UIViewController, UITableViewDelegate, UITableVie
         // Do any additional setup after loading the view, typically from a nib.
         users = []
         page = 0
-        moreData = true
+        self.loadingMore = false
+        self.moreData = true
+        self.api = PokeApi.instance
+        self.alertMessage = AlertMessage.instance
         
         loadMore()
     }
@@ -48,16 +51,16 @@ class UserTableViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func loadMore(){
-        page += 1
+        self.page! += 1
         api.getTenUsers(page, completionHandler: { errorMessage, newUsers in
             if errorMessage != nil {
-                self.alertMassage.displayErrorMessage(errorMessage!, ViewController: self)
+                self.alertMessage.displayErrorMessage(errorMessage!, ViewController: self)
             }
             if newUsers?.count == 0 {
                 self.moreData = false
                 return
             }
-            self.users += newUsers!
+            self.users! += newUsers!
             //reload tableView data not asynch (doing this asynch causes the tableview to sometimes update before the new data is available)
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.tableView.reloadData()

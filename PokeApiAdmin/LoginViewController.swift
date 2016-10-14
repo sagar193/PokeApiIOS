@@ -10,7 +10,7 @@ import UIKit
 
 class LoginViewController: UIViewController{
     //MARK: Variables
-    let pokeApi = PokeApi.instance
+    var pokeApi: PokeApi!
     var alertMessage: AlertMessage!
     
     //MARK: UIElements
@@ -18,10 +18,15 @@ class LoginViewController: UIViewController{
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     //MARK: Actions
+    override func viewDidLoad() {
+        pokeApi = PokeApi.instance
+        alertMessage = AlertMessage.instance
+    }
+    
     override func viewDidAppear(animated: Bool) {
-        alertMessage = AlertMessage()
         
         //fill the email textfield
         emailTextField.text = NSUserDefaults.standardUserDefaults().stringForKey("userEmail")
@@ -55,7 +60,14 @@ class LoginViewController: UIViewController{
             return
         }
         
+        self.activityIndicatorAction(true)
+        
         pokeApi.login(email!, password: password!, completionHandler: { responseCode, error in
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.activityIndicatorAction(false)
+            })
+            
             if responseCode == 200 {
                 NSUserDefaults.standardUserDefaults().setObject(email, forKey: "userEmail")
                 NSUserDefaults.standardUserDefaults().synchronize()
@@ -74,7 +86,17 @@ class LoginViewController: UIViewController{
         })       
         
         
-    }    
+    }
+    
+    func activityIndicatorAction(enable: Bool){
+        if enable {
+            self.activityIndicator.startAnimating()
+            self.loginButton.hidden = true
+        } else {
+            self.activityIndicator.stopAnimating()
+            self.loginButton.hidden = false
+        }
+    }
     
     func dismissKeyboard(){
         view.endEditing(true)
