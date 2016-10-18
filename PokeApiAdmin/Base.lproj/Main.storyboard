@@ -99,7 +99,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hax-hi-pHf">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hax-hi-pHf">
                                 <rect key="frame" x="111" y="110" width="244" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -107,7 +107,7 @@
                                     <action selector="textFieldValueChanged:" destination="hok-ml-twz" eventType="editingChanged" id="Kpp-Sg-5mf"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4XE-eq-PRh">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4XE-eq-PRh">
                                 <rect key="frame" x="111" y="148" width="244" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -115,15 +115,15 @@
                                     <action selector="textFieldValueChanged:" destination="hok-ml-twz" eventType="editingChanged" id="djo-qs-bVK"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tf5-dt-jqq">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tf5-dt-jqq">
                                 <rect key="frame" x="111" y="186" width="244" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="textFieldValueChanged:" destination="hok-ml-twz" eventType="editingChanged" id="54k-SM-ryT"/>
+                                    <outlet property="delegate" destination="hok-ml-twz" id="8VT-EU-qih"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f1T-qX-9B3">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f1T-qX-9B3">
                                 <rect key="frame" x="111" y="72" width="244" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -134,6 +134,13 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <pickerView hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HhW-qw-ay7">
+                                <rect key="frame" x="111" y="163" width="244" height="75"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="hok-ml-twz" id="JM8-wT-8pJ"/>
+                                    <outlet property="delegate" destination="hok-ml-twz" id="zbE-tx-hz9"/>
+                                </connections>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -182,6 +189,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="Hax-hi-pHf" id="EKN-we-QAJ"/>
                         <outlet property="passwordTextField" destination="4XE-eq-PRh" id="3NW-qt-zie"/>
+                        <outlet property="rolePickerView" destination="HhW-qw-ay7" id="3lD-0m-pGe"/>
                         <outlet property="roleTextField" destination="tf5-dt-jqq" id="UvS-Tn-Pbq"/>
                         <outlet property="saveButton" destination="wvp-Hf-bEb" id="axx-GI-o2Z"/>
                         <outlet property="tap" destination="xLi-OD-lN7" id="mbQ-m6-lpL"/>

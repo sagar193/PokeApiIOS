@@ -205,6 +205,56 @@ class PokeApi {
         task.resume()
     }
     
+    func getAvailableRoles(completionHandler: (String?, [String]?) -> Void) {
+        //Set up the url and HTTP Method
+        let url = NSURL(string: "https://pokeapi9001.herokuapp.com/api/roles")
+        let request = NSMutableURLRequest(URL:url!)
+        request.HTTPMethod = "GET"
+        
+        request.cachePolicy = NSURLRequestCachePolicy.ReturnCacheDataElseLoad
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            data, response, error in
+            
+            if error != nil {
+                print("Error: \(error)")
+                return
+            }
+            do {
+                guard let data = data else {
+                    throw JSONError.NoData
+                }
+                //If data parsing to JSON  doesn't works then execute the following code
+                guard let json = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? NSDictionary else {
+                    throw JSONError.ConversionFailed
+                }
+                // if data parsing works, but an 401 is given
+                if json["status"]!.integerValue == 401 {
+                    completionHandler("User not logged in!", nil)
+                    // if a status 200 is given
+                } else if json["status"]!.integerValue == 200 {
+                    //Create a fresh instance of roles
+                    var roleNames: [String] = []
+                    //Add every role
+                    for i in 0 ..< json["data"]!.count {
+                        let name = json["data"]![i]["name"]!! as! String
+                        roleNames.append(name)
+                    }
+                    completionHandler(nil, roleNames)
+                    //if neither a 401 or a 200 error is given by the server
+                } else {
+                    completionHandler("unexpected error", nil)
+                }
+                //Data parsing failed, code is printed to the console
+                //More clear error messages might have to be implemented
+            } catch let error as JSONError {
+                completionHandler(error.rawValue, nil)
+            } catch let error as NSError {
+                completionHandler(error.debugDescription, nil)
+            }
+        }
+        task.resume()
+    }
+    
     func saveUser(user: User, completionHandler: (String?, User?) -> Void) {
         let url = NSURL(string: "https://pokeapi9001.herokuapp.com/api/users/")
         let request = NSMutableURLRequest(URL:url!)
@@ -234,7 +284,7 @@ class PokeApi {
                 if json["status"]!.integerValue == 401 {
                     completionHandler("User not logged in!", nil)
                     // if a status 200 is given
-                } else if json["status"]!.integerValue == 200 {
+                } else if json["status"]!.integerValue == 201 {
                     //get name
                     var name: String = ""
                     if json["data"]![0]["local"]! != nil {

@@ -8,17 +8,19 @@
 
 import UIKit
 
-class UserViewController: UIViewController{
+class UserViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate{
     //MARK: UIElements
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var roleTextField: UITextField!
     @IBOutlet var tap: UITapGestureRecognizer!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var rolePickerView: UIPickerView!
     
     //MARK: Variables
     var alertMessage: AlertMessage!
     var api: PokeApi!
+    var rolePickerViewData: [String]!
     
     
     //This value is either passed by 'UserTableViewController' in 'prepareForSegue(_:sender:)' or constructed as part of adding a new user.
@@ -82,15 +84,49 @@ class UserViewController: UIViewController{
         checkValidTextFields()
     }
     
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        rolePickerView.hidden = false
+        roleTextField.hidden = true
+        return false
+    }
+    
+    //MARK: UIPickerViewDelegates
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return rolePickerViewData.count
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return rolePickerViewData[row]
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        roleTextField.text = rolePickerViewData[row]
+        rolePickerView.hidden = true
+        roleTextField.hidden = false
+    }
+    
     //MARK: Actions
     override func viewDidAppear(animated: Bool) {
     }
     
     override func viewDidLoad() {
-        api = PokeApi.instance
-        alertMessage = AlertMessage.instance
-        
+        self.api = PokeApi.instance
+        self.alertMessage = AlertMessage.instance
         super.viewDidLoad()
+        
+        //Fill rolePickerView
+        api.getAvailableRoles({ responseError, users in
+            if responseError != nil {
+                self.alertMessage.displayErrorMessage(responseError!, ViewController: self)
+            } else {
+                self.rolePickerViewData = users
+                //self.roleTextField.text = self.rolePickerViewData[0]
+            }
+        })
         
         //Execute dismissKeyboard when there is a tap gesture not on any element
         tap.addTarget(self, action: #selector(UserViewController.dismissKeyboard))
@@ -99,8 +135,11 @@ class UserViewController: UIViewController{
         checkValidTextFields()
     }
     
+    //Function to dismiss the keyboard
     func dismissKeyboard(){
         view.endEditing(true)
+        rolePickerView.hidden = true
+        roleTextField.hidden = false
     }
     
 }
