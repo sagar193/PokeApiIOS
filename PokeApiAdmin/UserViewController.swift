@@ -44,7 +44,8 @@ class UserViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                     self.alertMessage.displayErrorMessage(error!, ViewController: self)
                 })
             } else {
-                //TODO: insert segue to return back to table view
+                self.user = User(email: (rUser?.email)!, id: (rUser?.id)!, role: (rUser?.role)!)
+                self.performSegueWithIdentifier("unwindToUserTable", sender: self)
             }
         })
     }
@@ -107,12 +108,10 @@ class UserViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         roleTextField.text = rolePickerViewData[row]
         rolePickerView.hidden = true
         roleTextField.hidden = false
+        checkValidTextFields()
     }
     
-    //MARK: Actions
-    override func viewDidAppear(animated: Bool) {
-    }
-    
+    //MARK: Actions    
     override func viewDidLoad() {
         self.api = PokeApi.instance
         self.alertMessage = AlertMessage.instance

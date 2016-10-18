@@ -16,6 +16,7 @@ class UserTableViewController: UIViewController, UITableViewDelegate, UITableVie
     var moreData: Bool!
     var api: PokeApi!
     var alertMessage: AlertMessage!
+    var addedUsers: [String]!
     
     //MARK: UIElements
     @IBOutlet weak var tableView: UITableView!
@@ -30,6 +31,7 @@ class UserTableViewController: UIViewController, UITableViewDelegate, UITableVie
         self.moreData = true
         self.api = PokeApi.instance
         self.alertMessage = AlertMessage.instance
+        addedUsers = []
         
         loadMore()
     }
@@ -60,7 +62,18 @@ class UserTableViewController: UIViewController, UITableViewDelegate, UITableVie
                 self.moreData = false
                 return
             }
-            self.users! += newUsers!
+            
+            var varNewUsers = newUsers
+            
+            for (index, nUsers) in (varNewUsers?.enumerate())! {
+                for aUsers in self.addedUsers! as [String] {
+                    if nUsers.id == aUsers {
+                        varNewUsers?.removeAtIndex(index)
+                    }
+                }
+            }
+            
+            self.users! += varNewUsers!
             //reload tableView data not asynch (doing this asynch causes the tableview to sometimes update before the new data is available)
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.tableView.reloadData()
@@ -87,12 +100,10 @@ class UserTableViewController: UIViewController, UITableViewDelegate, UITableVie
         if let sourceViewController = sender.sourceViewController as? UserViewController, user = sourceViewController.user {
             //add a new user
             let newIndexPath = NSIndexPath(forRow: users.count, inSection: 0)
-            print("user mail = " + (user.email))
+            addedUsers.append(user.id!)
             users.append(user)
-            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
-        }
-        if let sourceViewController = sender.sourceViewController as? UserViewController{
-        print(sourceViewController.user?.email)
+            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Right)
+            self.tableView.reloadData()
         }
         
     }

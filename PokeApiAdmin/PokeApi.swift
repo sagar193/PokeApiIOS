@@ -287,15 +287,15 @@ class PokeApi {
                 } else if json["status"]!.integerValue == 201 {
                     //get name
                     var name: String = ""
-                    if json["data"]![0]["local"]! != nil {
-                        name = json["data"]![0]["local"]!!["email"] as! String
-                    } else if json["data"]![0]["facebook"]! != nil {
-                        name = json["data"]![0]["facebook"]!!["email"] as! String
+                    if json["data"]!["local"]! != nil {
+                        name = json["data"]!["local"]!!["email"] as! String
+                    } else if json["data"]!["facebook"]! != nil {
+                        name = json["data"]!["facebook"]!!["email"] as! String
                     }
                     //get id
-                    let id = json["data"]![0]["_id"]!! as! String
+                    let id = json["data"]!["_id"]!! as! String
                     //get roles
-                    var role = json["data"]![0]["role"]!! as! String
+                    var role = json["data"]!["role"]!! as! String
                     role = self.roles[role]!
                     
                     let user = User(email: name, id: id, role: role)

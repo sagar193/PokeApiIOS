@@ -193,9 +193,11 @@
                         <outlet property="roleTextField" destination="tf5-dt-jqq" id="UvS-Tn-Pbq"/>
                         <outlet property="saveButton" destination="wvp-Hf-bEb" id="axx-GI-o2Z"/>
                         <outlet property="tap" destination="xLi-OD-lN7" id="mbQ-m6-lpL"/>
+                        <segue destination="gxN-Fl-J8z" kind="unwind" identifier="unwindToUserTable" unwindAction="unwindToUserList:" id="Zam-40-JPC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hbH-QP-hB6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="gxN-Fl-J8z" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="xLi-OD-lN7"/>
             </objects>
             <point key="canvasLocation" x="2470.5" y="423.5"/>
