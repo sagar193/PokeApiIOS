@@ -22,11 +22,12 @@ class UserViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     var alertMessage: AlertMessage!
     var api: PokeApi!
     var rolePickerViewData: [String]!
+    //This value is either passed by 'UserTableViewController' in 'prepareForSegue(_:sender:)' or constructed as part of adding a new user.
+    var user: User!
+    //TODO: Implement existingUser bool everywhere
     var existingUser: Bool!
     
     
-    //This value is either passed by 'UserTableViewController' in 'prepareForSegue(_:sender:)' or constructed as part of adding a new user.
-    var user: User!
     
     //MARK: Navigation
     @IBAction func cancel(sender: UIBarButtonItem) {
@@ -39,17 +40,21 @@ class UserViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         let role = roleTextField.text
         let user = User(email: email!, password: password!, role: role!)
         
-        api.saveUser(user, completionHandler: {error, rUser in
-            print("here \(rUser?.email)")
-            if (error != nil){
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.alertMessage.displayErrorMessage(error!, ViewController: self)
-                })
-            } else {
-                self.user = User(email: (rUser?.email)!, id: (rUser?.id)!, role: (rUser?.role)!)
-                self.performSegueWithIdentifier("unwindToUserTable", sender: self)
-            }
-        })
+        if existingUser! {
+            //todo: api.editUser
+        } else {
+            api.saveUser(user, completionHandler: {error, rUser in
+                if (error != nil){
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.alertMessage.displayErrorMessage(error!, ViewController: self)
+                    })
+                } else {
+                    self.user = User(email: (rUser?.email)!, id: (rUser?.id)!, role: (rUser?.role)!)
+                    self.performSegueWithIdentifier("unwindToUserTable", sender: self)
+                }
+            })
+            
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -74,12 +79,19 @@ class UserViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         } else {
             navigationItem.title = email
         }
-        
         //Disable the save button if text field is empty
-        if email.isEmpty || password.isEmpty || role.isEmpty {
-            saveButton.enabled = false
+        if existingUser! {
+            if email.isEmpty || role.isEmpty {
+                saveButton.enabled = false
+            } else {
+                saveButton.enabled = true
+            }
         } else {
-            saveButton.enabled = true
+            if email.isEmpty || password.isEmpty || role.isEmpty {
+                saveButton.enabled = false
+            } else {
+                saveButton.enabled = true
+            }
         }
     }
     
@@ -125,7 +137,9 @@ class UserViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 self.alertMessage.displayErrorMessage(responseError!, ViewController: self)
             } else {
                 self.rolePickerViewData = users
-                //self.roleTextField.text = self.rolePickerViewData[0]
+                if !self.existingUser! {
+                    self.roleTextField.text = self.rolePickerViewData[0]
+                }
             }
         })
         

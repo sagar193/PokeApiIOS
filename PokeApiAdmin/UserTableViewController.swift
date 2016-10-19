@@ -24,12 +24,18 @@ class UserTableViewController: UIViewController, UITableViewDelegate, UITableVie
     //MARK: Navigation
     @IBAction func unwindToUserList(sender: UIStoryboardSegue){
         if let sourceViewController = sender.sourceViewController as? UserViewController, user = sourceViewController.user {
-            //add a new user
-            let newIndexPath = NSIndexPath(forRow: users.count, inSection: 0)
-            addedUsers.append(user.id!)
-            users.append(user)
-            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Right)
-            self.tableView.reloadData()
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                //update an selected user
+                users[selectedIndexPath.row] = user
+                tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
+            } else {
+                //add a new user
+                let newIndexPath = NSIndexPath(forRow: users.count, inSection: 0)
+                addedUsers.append(user.id!)
+                users.append(user)
+                tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Right)
+                self.tableView.reloadData()
+            }
         }
     }
     
