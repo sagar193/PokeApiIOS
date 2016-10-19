@@ -24,17 +24,29 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="49" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VdV-4o-Uhs">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="45" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VdV-4o-Uhs">
                                 <rect key="frame" x="16" y="107" width="343" height="540"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="customcell" id="MXJ-z9-ttV">
-                                        <rect key="frame" x="0.0" y="28" width="343" height="49"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="UserTableViewCell" rowHeight="45" id="MXJ-z9-ttV" customClass="UserTableViewCell" customModule="PokeApiAdmin" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MXJ-z9-ttV" id="NpO-U0-RZR">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="48"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="US8-Mx-0w1">
+                                                    <rect key="frame" x="8" y="8" width="327" height="28"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="emailLabel" destination="US8-Mx-0w1" id="Ftn-tF-FD6"/>
+                                            <segue destination="hok-ml-twz" kind="show" identifier="ShowDetail" id="1IU-jV-Rgz"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -188,6 +200,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="emailTextField" destination="Hax-hi-pHf" id="EKN-we-QAJ"/>
+                        <outlet property="idTextField" destination="f1T-qX-9B3" id="lun-ho-LsI"/>
                         <outlet property="passwordTextField" destination="4XE-eq-PRh" id="3NW-qt-zie"/>
                         <outlet property="rolePickerView" destination="HhW-qw-ay7" id="3lD-0m-pGe"/>
                         <outlet property="roleTextField" destination="tf5-dt-jqq" id="UvS-Tn-Pbq"/>
@@ -337,7 +350,10 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BqJ-Yp-vFh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1902.5" y="423.5"/>
+            <point key="canvasLocation" x="1920.5" y="804.5"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="kWI-wG-7vg"/>
+    </inferredMetricsTieBreakers>
 </document>

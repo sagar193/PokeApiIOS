@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE092DEA1DB6939F0032956A /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE092DE91DB6939F0032956A /* UserTableViewCell.swift */; };
 		CE0C33521DA3C23A000A1DCF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C33511DA3C23A000A1DCF /* User.swift */; };
 		CE0C33561DAB96D9000A1DCF /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C33551DAB96D9000A1DCF /* UserViewController.swift */; };
 		CE41AB8B1D09A7DD00DA7F91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE41AB8A1D09A7DD00DA7F91 /* AppDelegate.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE092DE91DB6939F0032956A /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		CE0C33511DA3C23A000A1DCF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CE0C33551DAB96D9000A1DCF /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		CE41AB871D09A7DD00DA7F91 /* PokeApiAdmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokeApiAdmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +96,7 @@
 				CE41AB961D09A7DE00DA7F91 /* Info.plist */,
 				CE0C33511DA3C23A000A1DCF /* User.swift */,
 				CE41AB8C1D09A7DD00DA7F91 /* UserTableViewController.swift */,
+				CE092DE91DB6939F0032956A /* UserTableViewCell.swift */,
 				CEFEB3821D12CC4600A7B3B9 /* LoginViewController.swift */,
 				CE0C33551DAB96D9000A1DCF /* UserViewController.swift */,
 				CEFEB3861D1D5E6000A7B3B9 /* AlertMessage.swift */,
@@ -216,6 +219,7 @@
 				CEFEB3851D19876200A7B3B9 /* PokeApi.swift in Sources */,
 				CEFEB3871D1D5E6000A7B3B9 /* AlertMessage.swift in Sources */,
 				CE0C33521DA3C23A000A1DCF /* User.swift in Sources */,
+				CE092DEA1DB6939F0032956A /* UserTableViewCell.swift in Sources */,
 				CE41AB8D1D09A7DD00DA7F91 /* UserTableViewController.swift in Sources */,
 				CE41AB8B1D09A7DD00DA7F91 /* AppDelegate.swift in Sources */,
 				CEFEB3831D12CC4600A7B3B9 /* LoginViewController.swift in Sources */,

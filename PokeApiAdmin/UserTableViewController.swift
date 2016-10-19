@@ -21,6 +21,34 @@ class UserTableViewController: UIViewController, UITableViewDelegate, UITableVie
     //MARK: UIElements
     @IBOutlet weak var tableView: UITableView!
     
+    //MARK: Navigation
+    @IBAction func unwindToUserList(sender: UIStoryboardSegue){
+        if let sourceViewController = sender.sourceViewController as? UserViewController, user = sourceViewController.user {
+            //add a new user
+            let newIndexPath = NSIndexPath(forRow: users.count, inSection: 0)
+            addedUsers.append(user.id!)
+            users.append(user)
+            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Right)
+            self.tableView.reloadData()
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ShowDetail" {
+            let userViewController = segue.destinationViewController as! UserViewController
+            
+            //get the cell that generated this segue
+            if let selectedUserCell = sender as? UserTableViewCell {
+                let indexPath = tableView.indexPathForCell(selectedUserCell)!
+                let selectedUser = users[indexPath.row]
+                userViewController.user = selectedUser
+            }
+        } else if segue.identifier == "AddItem" {
+            print("adding new meal")
+        }
+    }
+    
+    
     //MARK: Actions
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,10 +74,10 @@ class UserTableViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("customcell", forIndexPath: indexPath) as UITableViewCell!
-        cell.textLabel?.text = users[indexPath.item].email
+        let cell = tableView.dequeueReusableCellWithIdentifier("UserTableViewCell", forIndexPath: indexPath) as! UserTableViewCell
+        cell.emailLabel.text = users[indexPath.item].email
+        cell.user = users[indexPath.item]
         return cell
-        
     }
     
     func loadMore(){
@@ -96,17 +124,6 @@ class UserTableViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     
-    @IBAction func unwindToUserList(sender: UIStoryboardSegue){
-        if let sourceViewController = sender.sourceViewController as? UserViewController, user = sourceViewController.user {
-            //add a new user
-            let newIndexPath = NSIndexPath(forRow: users.count, inSection: 0)
-            addedUsers.append(user.id!)
-            users.append(user)
-            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Right)
-            self.tableView.reloadData()
-        }
-        
-    }
 
 }
 

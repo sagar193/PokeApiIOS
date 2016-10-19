@@ -11,6 +11,7 @@ import UIKit
 class UserViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate{
     //MARK: UIElements
     @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var roleTextField: UITextField!
     @IBOutlet var tap: UITapGestureRecognizer!
@@ -21,6 +22,7 @@ class UserViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     var alertMessage: AlertMessage!
     var api: PokeApi!
     var rolePickerViewData: [String]!
+    var existingUser: Bool!
     
     
     //This value is either passed by 'UserTableViewController' in 'prepareForSegue(_:sender:)' or constructed as part of adding a new user.
@@ -129,6 +131,17 @@ class UserViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         
         //Execute dismissKeyboard when there is a tap gesture not on any element
         tap.addTarget(self, action: #selector(UserViewController.dismissKeyboard))
+        
+        //Setup the view to edit an existing
+        if let user = user {
+            existingUser = true
+            navigationItem.title = user.email
+            idTextField.text = user.id
+            emailTextField.text = user.email
+            roleTextField.text = user.role
+        } else {
+            existingUser = false
+        }
         
         //Enable the save button only if the text field has a valid user name.
         checkValidTextFields()
