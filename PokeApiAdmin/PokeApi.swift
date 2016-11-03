@@ -260,7 +260,7 @@ class PokeApi {
         let request = NSMutableURLRequest(URL:url!)
         request.HTTPMethod = "POST"
         
-        let postString = "email=\(user.email)&password=\(user.password)&role=\(user.role)"
+        let postString = "email=\(user.email)&password=\(user.password!)&role=\(user.role)"
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
         
         request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringCacheData
@@ -314,6 +314,66 @@ class PokeApi {
                 completionHandler(error.debugDescription, nil)
             }
             
+        }
+        task.resume()
+    }
+    
+    func editUser(user: User, completionHandler: (String?, User?) -> Void) {
+        let url = NSURL(string: "https://pokeapi9001.herokuapp.com/api/users/\(user.id!)")
+        let request = NSMutableURLRequest(URL:url!)
+        request.HTTPMethod = "PUT"
+        
+        let postString = "email=\(user.email)&password=\(user.password!)&role=\(user.role)"
+        print (postString)
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringCacheData
+        
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            data, response, error in
+            if error != nil {
+                print("error: \(error)")
+            }
+            
+            do {
+                guard let data = data else {
+                    throw JSONError.NoData
+                }
+                guard let json = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? NSDictionary else {
+                    throw JSONError.ConversionFailed
+                }
+                
+                if json["status"]!.integerValue == 401 {
+                    completionHandler("User not logged in!", nil)
+                } else if json["status"]!.integerValue == 200 {
+                    //get name
+                    var name: String = ""
+                    if json["data"]!["local"]! != nil {
+                        name = json["data"]!["local"]!!["email"] as! String
+                    } else if json["data"]!["facebook"]! != nil {
+                        name = json["data"]!["facebook"]!!["email"] as! String
+                    }
+                    //get id
+                    let id = json["data"]!["_id"]!! as! String
+                    //get roles
+                    var role = json["data"]!["role"]!! as! String
+                    role = self.roles[role]!
+                    
+                    //return user
+                    let user = User(email: name, id: id, role: role)
+                    completionHandler(nil, user)
+                    
+                } else if json["status"]!.integerValue == 400 {
+                    completionHandler(json["data"] as? String, nil)
+                } else {
+                    completionHandler("Unknown error occured", nil)
+                }
+                
+            } catch let error as JSONError {
+                completionHandler(error.rawValue, nil)
+            } catch let error as NSError {
+                completionHandler(error.debugDescription, nil)
+            }
         }
         task.resume()
     }

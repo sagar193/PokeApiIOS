@@ -26,4 +26,11 @@ class User{
         self.role = role
     }
     
+    init(email: String, id: String, password: String, role: String){
+        self.email = email
+        self.id = id
+        self.password = password
+        self.role = role
+    }
+    
 }

@@ -25,10 +25,12 @@ class UserTableViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBAction func unwindToUserList(sender: UIStoryboardSegue){
         if let sourceViewController = sender.sourceViewController as? UserViewController, user = sourceViewController.user {
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                print("user edited \(selectedIndexPath.row)")
                 //update an selected user
                 users[selectedIndexPath.row] = user
                 tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
             } else {
+                print("user added")
                 //add a new user
                 let newIndexPath = NSIndexPath(forRow: users.count, inSection: 0)
                 addedUsers.append(user.id!)
@@ -66,6 +68,8 @@ class UserTableViewController: UIViewController, UITableViewDelegate, UITableVie
         self.api = PokeApi.instance
         self.alertMessage = AlertMessage.instance
         addedUsers = []
+        
+        navigationItem.leftBarButtonItem = editButtonItem()
         
         loadMore()
     }

@@ -31,17 +31,34 @@ class UserViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     //MARK: Navigation
     @IBAction func cancel(sender: UIBarButtonItem) {
-        dismissViewControllerAnimated(true, completion: nil)
+        let isPresentingInAddUserMode = presentingViewController is UINavigationController
+        if isPresentingInAddUserMode{
+            dismissViewControllerAnimated(true, completion: nil)
+        } else {
+            navigationController!.popViewControllerAnimated(true)
+        }
     }
     
     @IBAction func save(sender: UIBarButtonItem) {
         let email = emailTextField.text
         let password = passwordTextField.text
         let role = roleTextField.text
-        let user = User(email: email!, password: password!, role: role!)
+        let id = idTextField.text
+        let user = User(email: email!, id: id!, password: password!, role: role!)
         
-        if existingUser! {
-            //todo: api.editUser
+        if existingUser! {            
+            api.editUser(user, completionHandler: {error, rUser in
+                if (error != nil) {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.alertMessage.displayErrorMessage(error!, ViewController: self)
+                    })
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.user = User(email: (rUser?.email)!, id: (rUser?.id)!, role: (rUser?.role)!)
+                        self.performSegueWithIdentifier("unwindToUserTable", sender: self)
+                    })
+                }
+            })
         } else {
             api.saveUser(user, completionHandler: {error, rUser in
                 if (error != nil){
