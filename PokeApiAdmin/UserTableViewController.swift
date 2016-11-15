@@ -90,6 +90,28 @@ class UserTableViewController: UIViewController, UITableViewDelegate, UITableVie
         return cell
     }
     
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            //Delete the row from the source data
+            api.deleteUser(users[indexPath.row], completionHandler: { errorMessage, deletedUser in
+                dispatch_async(dispatch_get_main_queue(), {
+                    if errorMessage != nil {
+                        self.alertMessage.displayErrorMessage(errorMessage!, ViewController: self)
+                    } else {
+                        self.users.removeAtIndex(indexPath.row)
+                        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                    }
+                })
+            })
+        } else if editingStyle == .Insert {
+            //Create new instance of the appropriate class, insert it into the array, and add a new row to the table View
+        }
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
     func loadMore(){
         self.page! += 1
         api.getTenUsers(page, completionHandler: { errorMessage, newUsers in

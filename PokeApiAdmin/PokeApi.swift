@@ -261,6 +261,7 @@ class PokeApi {
         request.HTTPMethod = "POST"
         
         let postString = "email=\(user.email)&password=\(user.password!)&role=\(user.role)"
+        print (postString)
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
         
         request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringCacheData
@@ -319,11 +320,15 @@ class PokeApi {
     }
     
     func editUser(user: User, completionHandler: (String?, User?) -> Void) {
-        let url = NSURL(string: "https://pokeapi9001.herokuapp.com/api/users/\(user.id!)")
+        let url = NSURL(string: "https://pokeapi9001.herokuapp.com/api/users/\(user.id!)/")
         let request = NSMutableURLRequest(URL:url!)
         request.HTTPMethod = "PUT"
         
         let postString = "email=\(user.email)&password=\(user.password!)&role=\(user.role)"
+        let postLength = "\(postString.endIndex)"
+        request.setValue(postLength, forHTTPHeaderField: "Content-Length")
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        
         print (postString)
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
         
@@ -378,4 +383,40 @@ class PokeApi {
         task.resume()
     }
     
+    
+    func deleteUser(user: User, completionHandler: (String?, User?) -> Void) {
+        let url = NSURL(string: "https://pokeapi9001.herokuapp.com/api/users/\(user.id!)/")
+        let request = NSMutableURLRequest(URL:url!)
+        request.HTTPMethod = "DELETE"
+        
+        request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringCacheData
+        
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            data, response, error in
+            if error != nil {
+                print("error: \(error)")
+            }
+            
+            do {
+                guard let data = data else {
+                    throw JSONError.NoData
+                }
+                guard let json = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? NSDictionary else {
+                    throw JSONError.ConversionFailed
+                }
+                
+                if json["status"]!.integerValue == 500 {
+                    completionHandler("Delete failed!", nil)
+                } else if json["status"]!.integerValue == 200 {
+                    completionHandler(nil, user)
+                }
+                
+            } catch let error as JSONError {
+                completionHandler(error.rawValue, nil)
+            } catch let error as NSError {
+                completionHandler(error.debugDescription, nil)
+            }
+        }
+        task.resume()
+    }
 }
